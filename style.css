@@ -1,0 +1,194 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-image: url(/S.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    backdrop-filter: blur(10px);
+}
+
+
+.navbar {
+    background-color: rgba(255, 255, 255, 0.5); 
+    backdrop-filter: blur(10px);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+
+.navbar a {
+    color: var(--primary-color); 
+    text-decoration: none; 
+    margin: 0 10px; 
+    padding: 8px 12px; 
+    border-radius: 5px; 
+    transition: background-color 0.3s ease; 
+}
+
+.navbar a:hover {
+    background-color: rgba(127, 127, 127, 0.5); 
+    color: var(--hover-color); 
+}
+
+
+.back {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+h1 {
+    color: rgba(255, 255, 255, 0.85);
+    display: flex;
+    justify-content: center;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: none;
+    padding: 8px;
+    width: 9.09%;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+td {
+    align-items: center;
+    text-align: center; 
+}
+
+th {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: rgb(0, 0, 0);
+}
+
+.tabelaPontos, #tabelaPontos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tabelaPontos th, .tabelaPontos td, #tabelaPontos th, #tabelaPontos td {
+    padding: 10px;
+    border: none; 
+    text-align: center;
+    min-width: 70px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+
+::placeholder {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+
+button:hover, .pagination button:hover, .butaoEx:hover {
+    cursor: pointer;
+    background-color: var(--hover-bg);
+    color: var(--hover-color);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:focus, .butao:focus, .butaoEx:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.85);
+}
+
+button:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+input {
+    text-align: center;
+}
+
+
+.header, .excel, .pagination {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Filtros */
+.filtros {
+    display: flex;
+    justify-content: center; 
+    margin-top: 20px; 
+}
+
+
+.labelHe, .datel {
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0.5rem;
+}
+
+.caixa, .caixaEx, .date {
+    color: var(--primary-color);
+    border-radius: 1rem;
+    padding: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background-color: var(--primary-bg);
+    margin-left: 0.5rem;
+}
+
+.butao, .butaoEx, .pagination button {
+    color: var(--primary-color);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 1rem;
+    padding: 5px 10px;
+    background-color: var(--primary-bg);
+    margin-left: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.pagination .page-active {
+    background-color: var(--hover-bg);
+    color: var(--hover-color);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+
+@media (max-width: 768px) {
+    .header, .excel, .filtros, .pagination {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tabelaPontos th, .tabelaPontos td {
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .butao, .butaoEx, .caixa, .caixaEx {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
+
+
+:root {
+    --primary-bg: rgba(255, 255, 255, 0.5);
+    --primary-color: rgba(0, 0, 0, 0.95);
+    --hover-bg: rgba(127, 127, 127, 0.5);
+    --hover-color: rgba(255, 255, 255, 0.85);
+}
