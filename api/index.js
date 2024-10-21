@@ -122,3 +122,21 @@ app.post('/pontos', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
+const express = require('express');
+const cors = require('cors');
+const app = express();
+
+// Permitir apenas a URL do frontend na Vercel
+app.use(cors({
+  origin: 'https://meu-frontend.vercel.app', // Substitua pela URL do seu frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+}));
+
+// Rotas e outros middlewares
+app.get('/', (req, res) => {
+  res.send('API está funcionando!');
+});
+
+app.listen(3000, () => {
+  console.log('Servidor rodando na porta 3000');
+});
