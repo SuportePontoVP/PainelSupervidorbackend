@@ -5,7 +5,7 @@ const moment = require('moment');
 const xss = require('xss'); // Proteção contra injeção de código
 require('dotenv').config();
 const app = express();
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 3000;
 
 
 // Conexão com o MongoDB Atlas
