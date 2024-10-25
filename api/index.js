@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 10000;
 // Conexão com o MongoDB Atlas
 async function conectarMongoDB() {
     try {
-        await mongoose.connect(process.env.MONGO_URI);
+        await mongoose.connect('mongodb+srv://suportepontovp:kUHEzvMWrjlnqWH9@pontobeta.1rtcv.mongodb.net/?retryWrites=true&w=majority&appName=PontoBeta');
         console.log('Conectado ao MongoDB Atlas');
     } catch (err) {
         console.error('Erro ao conectar ao MongoDB:', err);
