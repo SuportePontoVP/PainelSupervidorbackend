@@ -39,7 +39,7 @@ const pontoSchema = new mongoose.Schema({
 const Ponto = mongoose.model('Ponto', pontoSchema);
 
 app.use(cors({
-    origin: 'https://meu-frontend.vercel.app', // Substitua pela URL do seu frontend
+    origin: 'painel-supervidor-frontend.vercel.app', // Substitua pela URL do seu frontend
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 
