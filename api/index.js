@@ -8,8 +8,6 @@ const xss = require('xss'); // Proteção contra injeção de código
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-
-
 // Conexão com o MongoDB Atlas
 async function conectarMongoDB() {
     try {
@@ -40,16 +38,10 @@ const pontoSchema = new mongoose.Schema({
 
 const Ponto = mongoose.model('Ponto', pontoSchema);
 
-app.use(cors({
-    origin: 'https://painel-supervidor-frontend.vercel.app', // Substitua pela URL do seu frontend
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
-}));
-app.use(express.json());
-
+// Configuração do CORS
 const allowedOrigins = ['https://painel-supervidor-frontend.vercel.app'];
-
 app.use(cors({
-    origin: function(origin, callback) {
+    origin: function (origin, callback) {
         if (!origin || allowedOrigins.indexOf(origin) !== -1) {
             callback(null, true);
         } else {
@@ -57,6 +49,8 @@ app.use(cors({
         }
     }
 }));
+
+app.use(express.json());
 
 // Função para calcular horas trabalhadas
 const calcularHorasTrabalhadas = (ponto) => {
@@ -137,6 +131,19 @@ app.post('/pontos', async (req, res) => {
     }
 });
 
+// Iniciar o servidor
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
+
+// Exemplo de função para buscar todos os pontos (sem uso no servidor, remover se não necessário)
+async function buscarTodosPontos() {
+    try {
+        const response = await fetch("https://painelsupervidorbackend.onrender.com/pontos");
+        const data = await response.json(); // Tente obter como JSON diretamente
+        return data;
+    } catch (error) {
+        console.error("Erro ao buscar todos os pontos:", error);
+        return [];
+    }
+}
