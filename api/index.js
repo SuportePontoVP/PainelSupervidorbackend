@@ -39,7 +39,8 @@ const pontoSchema = new mongoose.Schema({
 const Ponto = mongoose.model('Ponto', pontoSchema);
 
 // Configuração do CORS
-const allowedOrigins = ['https://painel-supervidor-frontend.vercel.app'];
+const allowedOrigins = ['https://painel-supervidor-frontend.vercel.app']; // Adicione outras origens, se necessário
+
 app.use(cors({
     origin: function (origin, callback) {
         if (!origin || allowedOrigins.indexOf(origin) !== -1) {
@@ -47,7 +48,8 @@ app.use(cors({
         } else {
             callback(new Error('Not allowed by CORS'));
         }
-    }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
 }));
 
 app.use(express.json());
@@ -131,19 +133,6 @@ app.post('/pontos', async (req, res) => {
     }
 });
 
-// Iniciar o servidor
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
-
-// Exemplo de função para buscar todos os pontos (sem uso no servidor, remover se não necessário)
-async function buscarTodosPontos() {
-    try {
-        const response = await fetch("https://painelsupervidorbackend.onrender.com/pontos");
-        const data = await response.json(); // Tente obter como JSON diretamente
-        return data;
-    } catch (error) {
-        console.error("Erro ao buscar todos os pontos:", error);
-        return [];
-    }
-}
