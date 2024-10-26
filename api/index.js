@@ -38,17 +38,15 @@ const pontoSchema = new mongoose.Schema({
 
 const Ponto = mongoose.model('Ponto', pontoSchema);
 
-// Configuração do CORS
-const allowedOrigins = ['https://painel-supervidor-frontend.vercel.app']; // Adicione outras origens, se necessário
+// Configuração do CORS para permitir todas as origens (apenas para teste)
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*"); // Permite todas as origens
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
+// Middleware do CORS
 app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
 }));
 
