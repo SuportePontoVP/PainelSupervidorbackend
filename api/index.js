@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -7,11 +8,13 @@ const xss = require('xss'); // Proteção contra injeção de código
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+
+
 // Conexão com o MongoDB Atlas
 async function conectarMongoDB() {
     try {
-        await mongoose.connect('mongodb+srv://suportepontovp:kUHEzvMWrjlnqWH9@pontobeta.1rtcv.mongodb.net/?retryWrites=true&w=majority&appName=PontoBeta');
-        console.log('Conectado ao MongoDB Atlas');
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log('Conectado ao MongoDB');
     } catch (err) {
         console.error('Erro ao conectar ao MongoDB:', err);
         process.exit(1); // Encerra o servidor se não conectar
