@@ -3,24 +3,20 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const moment = require('moment');
 const xss = require('xss'); // Proteção contra injeção de código
-require('dotenv').config();
-const app = express();
-const PORT = process.env.PORT || 10000;
 
-// Conexão com o MongoDB Atlas
+const app = express();
+const PORT = process.env.PORT || 3000;
+
 // Conexão com o MongoDB Atlas
 async function conectarMongoDB() {
     try {
-        await mongoose.connect(process.env.MONGO_URI, {
-            // Remova as opções obsoletas
-        });
+        await mongoose.connect('mongodb+srv://suportepontovp:kUHEzvMWrjlnqWH9@pontobeta.1rtcv.mongodb.net/?retryWrites=true&w=majority&appName=PontoBeta');
         console.log('Conectado ao MongoDB Atlas');
     } catch (err) {
         console.error('Erro ao conectar ao MongoDB:', err);
         process.exit(1); // Encerra o servidor se não conectar
     }
 }
-
 
 conectarMongoDB();
 
@@ -41,11 +37,7 @@ const pontoSchema = new mongoose.Schema({
 
 const Ponto = mongoose.model('Ponto', pontoSchema);
 
-app.use(cors({
-    origin: ['https://painel-supervidor-frontend.vercel.app', 'http://localhost:3000'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-}));
-
+app.use(cors());
 app.use(express.json());
 
 // Função para calcular horas trabalhadas
@@ -77,7 +69,6 @@ const calcularHorasTrabalhadas = (ponto) => {
 app.get('/pontos', async (req, res) => {
     try {
         const pontos = await Ponto.find();
-        console.log("Pontos encontrados: ", pontos); // Adiciona log para ver os resultados
         const pontosComHoras = pontos.map(ponto => ({
             ...ponto.toObject(),
             HorasTrabalhadas: calcularHorasTrabalhadas(ponto)
@@ -130,4 +121,22 @@ app.post('/pontos', async (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
+const express = require('express');
+const cors = require('cors');
+const app = express();
+
+// Permitir apenas a URL do frontend na Vercel
+app.use(cors({
+  origin: 'https://meu-frontend.vercel.app', // Substitua pela URL do seu frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+}));
+
+// Rotas e outros middlewares
+app.get('/', (req, res) => {
+  res.send('API está funcionando!');
+});
+
+app.listen(3000, () => {
+  console.log('Servidor rodando na porta 3000');
 });
