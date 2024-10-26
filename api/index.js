@@ -6,7 +6,7 @@ const moment = require('moment');
 const xss = require('xss'); // Proteção contra injeção de código
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
 
 
@@ -45,6 +45,18 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
 }));
 app.use(express.json());
+
+const allowedOrigins = ['https://painel-supervidor-frontend.vercel.app'];
+
+app.use(cors({
+    origin: function(origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+}));
 
 // Função para calcular horas trabalhadas
 const calcularHorasTrabalhadas = (ponto) => {
